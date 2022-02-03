@@ -7,15 +7,18 @@
 const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
 const canvas = require('canvas'); // point
 
+const { render } = require('./app');
+
 module.exports = async (req, res) => {
     const width = 1200;
     const height = 630;
-    
-    const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, chartCallback: (ChartJS) => {
-        ChartJS.defaults.font.family = 'NotoSansJP-Black';
-    }});
 
-    chartJSNodeCanvas.registerFont('./fonts/NotoSansJP-Black.otf', { family: 'NotoSansJP-Black' });
+    
+    // const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, chartCallback: (ChartJS) => {
+    //     ChartJS.defaults.font.family = 'NotoSansJP-Black';
+    // }});
+
+    // chartJSNodeCanvas.registerFont('./fonts/NotoSansJP-Black.otf', { family: 'NotoSansJP-Black' });
 
     const configuration = {
         type: 'bar',
@@ -54,8 +57,10 @@ module.exports = async (req, res) => {
             }
         }
     };
-    
-    const buffer = await chartJSNodeCanvas.renderToBuffer(configuration);
+
+    const buffer = await render(width, height, '#fff', 2.0, configuration, branding = false)
+
+    // const buffer = await chartJSNodeCanvas.renderToBuffer(configuration);
     res.writeHead(200, {
         "Content-Type": "image/png",
         "Content-Length": buffer.length,
