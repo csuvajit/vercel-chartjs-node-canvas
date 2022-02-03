@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     
     const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, chartCallback: (ChartJS) => {
         ChartJS.defaults.font.family = 'NotoSansJP-Black';
-    } });
+    }});
 
     chartJSNodeCanvas.registerFont('./fonts/NotoSansJP-Black.otf', { family: 'NotoSansJP-Black' });
 
