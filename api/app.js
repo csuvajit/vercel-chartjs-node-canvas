@@ -52,7 +52,10 @@ function getRenderer(width, height) {
 
 	const key = [width, height];
 	if (!rendererCache[key]) {
-		rendererCache[key] = new CanvasRenderService(width, height);
+		rendererCache[key] = new CanvasRenderService(width, height, (c) => {
+            c.defaults.global.defaultFontFamily = 'NotoSansJP-Black';
+        });
+        rendererCache[key].registerFont('./fonts/NotoSansJP-Black.otf', { family: 'NotoSansJP-Black' });
 	}
 	return rendererCache[key];
 }
